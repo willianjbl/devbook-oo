@@ -20,9 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="476272b8-4ab0-4614-9f03-90372e369c94" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants.php" beforeDir="false" afterPath="$PROJECT_DIR$/constants.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,8 +78,17 @@
       <workItem from="1603904906686" duration="300000" />
       <workItem from="1603905222942" duration="4550000" />
       <workItem from="1603914318370" duration="164000" />
-      <workItem from="1603914765695" duration="11000" />
+      <workItem from="1603914765695" duration="85000" />
+      <workItem from="1603914963736" duration="106000" />
     </task>
+    <task id="LOCAL-00001" summary="ajuste de conexão de banco">
+      <created>1603914800777</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1603914800777</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -97,6 +105,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="ajuste de conexão de banco" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajuste de conexão de banco" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1385" y="175" key="#CLI_Interpreters" timestamp="1603904974914">
