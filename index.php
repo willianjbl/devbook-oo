@@ -1,4 +1,6 @@
 <?php
 
-$text = 'Hello World!';
-echo $text;
+require 'config.php';
+require 'models/Auth.php';
+
+$auth = new Auth($pdo, BASE);
