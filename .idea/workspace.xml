@@ -20,15 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="476272b8-4ab0-4614-9f03-90372e369c94" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/constants.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/Auth.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/Session.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/constants.php" beforeDir="false" afterPath="$PROJECT_DIR$/constants.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +52,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="power.mode.ii" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -84,6 +78,8 @@
       <workItem from="1603904670210" duration="225000" />
       <workItem from="1603904906686" duration="300000" />
       <workItem from="1603905222942" duration="4550000" />
+      <workItem from="1603914318370" duration="164000" />
+      <workItem from="1603914765695" duration="11000" />
     </task>
     <servers />
   </component>
@@ -100,6 +96,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1385" y="175" key="#CLI_Interpreters" timestamp="1603904974914">
@@ -178,9 +175,9 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="1623" height="344" key="GridCell.Tab.2.right/-1920.0.1920.1040/0.0.2560.1040@0.0.2560.1040" timestamp="1603906293133" />
-    <state x="457" y="164" key="SettingsEditor" timestamp="1603905423497">
+    <state x="457" y="164" key="SettingsEditor" timestamp="1603914421249">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="457" y="164" key="SettingsEditor/-1920.0.1920.1040/0.0.2560.1040@0.0.2560.1040" timestamp="1603905423497" />
+    <state x="457" y="164" key="SettingsEditor/-1920.0.1920.1040/0.0.2560.1040@0.0.2560.1040" timestamp="1603914421249" />
   </component>
 </project>
