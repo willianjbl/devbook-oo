@@ -9,14 +9,17 @@ class Session
         $this->initialize();
     }
 
-    private function initialize()
+    private function initialize(): void
     {
         session_start();
     }
 
     public static function get(string $key): string
     {
-        return $_SESSION[$key];
+        if (!empty($_SESSION[$key])) {
+            return $_SESSION[$key];
+        }
+        return '';
     }
 
     public static function set(string $key, string $value): void
