@@ -1,6 +1,6 @@
 <?php
 
-namespace models;
+namespace Devbook\models;
 
 class Session
 {

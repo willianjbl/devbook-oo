@@ -1,0 +1,24 @@
+{
+  "name": "devbook/devbook-oo",
+  "description": "projeto desenvolvido durante o curso da b7web - PHP - Utilizando OO",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "willian lúcio",
+      "email": "willian_jbl@hotmail.com"
+    }
+  ],
+  "config" : {
+    "vendor-dir": "vendor"
+  },
+  "autoload": {
+    "psr-4": {
+      "Devbook\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^7.4",
+    "ext-pdo": "*"
+  }
+}

@@ -1,6 +1,8 @@
 <?php
 
-namespace models;
+namespace Devbook\models;
+
+use PDO;
 
 class Auth
 {
@@ -9,7 +11,9 @@ class Auth
 
     public function __construct(PDO $pdo, string $base)
     {
-        $this->pdo = $pdo;
+        if (empty($this->pdo)) {
+            $this->pdo = $pdo;
+        }
         $this->base = $base;
     }
 

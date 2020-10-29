@@ -1,6 +1,8 @@
 <?php
 
-require 'config.php';
-require 'models/Auth.php';
+use Devbook\models\Auth;
+
+require 'config/config.php';
+require 'vendor/autoload.php';
 
 $auth = new Auth($pdo, BASE);
