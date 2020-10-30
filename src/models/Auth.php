@@ -19,6 +19,9 @@ class Auth
 
     public function checkLogin()
     {
-
+        if (empty(Session::get('TOKEN'))) {
+            header("Location: {$this->base}/login.php");
+            exit;
+        }
     }
 }
