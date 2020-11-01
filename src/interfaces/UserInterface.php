@@ -6,5 +6,5 @@ use Devbook\models\User;
 
 interface UserInterface
 {
-    public function findUserByToken(string $token): User;
+    function findUserByToken(string $token): User;
 }

@@ -1,7 +1,7 @@
 <?php
 
 // URL RAIZ
-define('BASE', 'http://localhost/devsbook-oo');
+define('BASE', 'http://localhost/devbook-oo');
 
 // DADOS DE ACESSO DB
 define('DB_NAME', 'devbook');

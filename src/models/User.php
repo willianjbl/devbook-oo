@@ -52,81 +52,91 @@ class User
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
     /**
-     * @param string $email
+     * @param string|null $email
      */
-    public function setEmail(string $email): void
+    public function setEmail(?string $email): void
     {
-        $this->email = $email;
+        if (!empty($email)) {
+            $this->email = $email;
+        }
     }
 
     /**
      * @return string
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
     /**
-     * @param string $password
+     * @param string|null $password
      */
-    public function setPassword(string $password): void
+    public function setPassword(?string $password): void
     {
-        $this->password = $password;
+        if (!empty($password)) {
+            $this->password = $password;
+        }
     }
 
     /**
      * @return string
      */
-    public function getBirthdate(): string
+    public function getBirthdate(): ?string
     {
         return $this->birthdate;
     }
 
     /**
-     * @param string $birthdate
+     * @param string|null $birthdate
      */
-    public function setBirthdate(string $birthdate): void
+    public function setBirthdate(?string $birthdate): void
     {
-        $this->birthdate = $birthdate;
+        if (!empty($birthdate)) {
+            $this->birthdate = $birthdate;
+        }
     }
 
     /**
      * @return string
      */
-    public function getCity(): string
+    public function getCity(): ?string
     {
         return $this->city;
     }
 
     /**
-     * @param string $city
+     * @param string|null $city
      */
-    public function setCity(string $city): void
+    public function setCity(?string $city): void
     {
-        $this->city = $city;
+        if (!empty($city)) {
+            $this->city = $city;
+        }
     }
 
     /**
      * @return string
      */
-    public function getWork(): string
+    public function getWork(): ?string
     {
         return $this->work;
     }
 
     /**
-     * @param string $work
+     * @param string|null $work
      */
-    public function setWork(string $work): void
+    public function setWork(?string $work): void
     {
-        $this->work = $work;
+        if (!empty($work)) {
+            $this->work = $work;
+        }
     }
 
     /**
@@ -177,5 +187,8 @@ class User
         $this->token = $token;
     }
 
-
+    public function isEmpty(): bool
+    {
+        return count((array)$this) === 0;
+    }
 }
