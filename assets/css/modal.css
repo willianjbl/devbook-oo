@@ -47,7 +47,6 @@
   overflow: hidden;
   max-width: 90%;
   max-height: 90%;
-  overflow-y: auto;
   background: #fff;
   z-index: -1;
   opacity: 0;

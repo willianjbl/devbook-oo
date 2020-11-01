@@ -221,11 +221,8 @@ var VanillaModal = (function () {
       configurable: true
     },
     _close: {
-
-      /**
-       * @param {Event} e
-       */
-      value: function Close(e) {
+      
+      value: function Close() {
         if (typeof this.$$.onBeforeClose === "function") this.$$.onBeforeClose.call(this);
         this._removeClass(this.$.page, this.$$["class"]);
         if (this.$$.transitions && this.$$.transitionEnd) {
