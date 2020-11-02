@@ -221,7 +221,7 @@ var VanillaModal = (function () {
       configurable: true
     },
     _close: {
-      
+
       value: function Close() {
         if (typeof this.$$.onBeforeClose === "function") this.$$.onBeforeClose.call(this);
         this._removeClass(this.$.page, this.$$["class"]);

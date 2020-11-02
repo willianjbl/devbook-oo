@@ -4,14 +4,10 @@ namespace Devbook\models;
 
 class Session
 {
-    public function __construct()
-    {
-        $this->initialize();
-    }
-
-    private function initialize(): void
+    public static function initialize(): void
     {
         session_start();
+        self::set('teste', 'teste');
     }
 
     public static function get(string $key): string

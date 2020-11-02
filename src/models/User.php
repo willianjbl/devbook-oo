@@ -20,33 +20,37 @@ class User
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * @param int|null $id
      */
-    public function setId(int $id): void
+    public function setId(?int $id): void
     {
-        $this->id = $id;
+        if (!empty($id)) {
+            $this->id = $id;
+        }
     }
 
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
+     * @param string|null $name
      */
-    public function setName(string $name): void
+    public function setName(?string $name): void
     {
-        $this->name = $name;
+        if (!empty($name)) {
+            $this->name = $name;
+        }
     }
 
     /**
@@ -142,49 +146,55 @@ class User
     /**
      * @return string
      */
-    public function getAvatar(): string
+    public function getAvatar(): ?string
     {
         return $this->avatar;
     }
 
     /**
-     * @param string $avatar
+     * @param string|null $avatar
      */
-    public function setAvatar(string $avatar): void
+    public function setAvatar(?string $avatar): void
     {
-        $this->avatar = $avatar;
+        if (!empty($avatar)) {
+            $this->avatar = $avatar;
+        }
     }
 
     /**
      * @return string
      */
-    public function getCover(): string
+    public function getCover(): ?string
     {
         return $this->cover;
     }
 
     /**
-     * @param string $cover
+     * @param string|null $cover
      */
-    public function setCover(string $cover): void
+    public function setCover(?string $cover): void
     {
-        $this->cover = $cover;
+        if (!empty($cover)) {
+            $this->cover = $cover;
+        }
     }
 
     /**
      * @return string
      */
-    public function getToken(): string
+    public function getToken(): ?string
     {
         return $this->token;
     }
 
     /**
-     * @param string $token
+     * @param string|null $token
      */
-    public function setToken(string $token): void
+    public function setToken(?string $token): void
     {
-        $this->token = $token;
+        if (!empty($token)) {
+            $this->token = $token;
+        }
     }
 
     public function isEmpty(): bool

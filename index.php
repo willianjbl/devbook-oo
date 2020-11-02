@@ -1,9 +1,13 @@
 <?php
 
-use Devbook\models\Auth;
+use Devbook\models\{
+    Auth,
+    Session
+};
 
 require 'config/config.php';
-require 'vendor/autoload.php';
+
+Session::initialize();
 
 $auth = new Auth($pdo);
 $auth->verifyToken();

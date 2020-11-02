@@ -15,10 +15,6 @@ class Auth
         if (empty($this->pdo)) {
             $this->pdo = $pdo;
         }
-
-        if (empty(Session::get('TOKEN'))) {
-            Common::redirect('login');
-        }
     }
 
     public function verifyToken(): User
@@ -30,5 +26,21 @@ class Auth
             Common::redirect('login');
         }
         return $user;
+    }
+
+    public function verifyLogin($email, $password): bool
+    {
+        $userDao = new UserDao($this->pdo);
+        $user = $userDao->checkLogin($email, $password);
+
+        if (!$user->isEmpty()) {
+            $token = md5(time() . rand(0, 99999) . $user->getEmail());
+            $user->setToken($token);
+
+            if ($userDao->update($user)) {
+                Session::set('TOKEN', $token);
+            }
+        }
+        return !empty(Session::get('TOKEN'));
     }
 }
