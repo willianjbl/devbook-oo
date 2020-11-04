@@ -17,4 +17,4 @@ if ($email && $password) {
     Common::flash(FLASH_ERROR, 'Login ou senha inválidos!');
 }
 
-Common::redirect('devbook-oo/login');
+Common::redirect('login');
