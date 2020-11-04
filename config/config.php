@@ -11,7 +11,7 @@ require 'vendor/autoload.php';
 Session::initialize();
 
 // INICIANDO CONEXÃO COM O BANCO DE DADOS
-$pdo = new Sql();
+$pdo = new MySql();
 
 // DEFININDO A HORA LOCAL
 date_default_timezone_set('America/Sao_Paulo');

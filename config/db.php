@@ -1,6 +1,6 @@
 <?php
 
-class Sql extends PDO
+class MySql extends PDO
 {
     private const DB_NAME = 'devbook';
     private const DB_HOST = 'localhost';
