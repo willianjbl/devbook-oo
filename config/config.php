@@ -2,9 +2,9 @@
 
 use Devbook\models\Session;
 
-// CARREGANDO CONFIGURAÇÕES
+// CARREGANDO CONFIGURAÇÕES E REQUÍSITOS
 require 'constants.php';
-require 'db.php';
+require 'MySql.php';
 require 'vendor/autoload.php';
 
 // INICIANDO A SESSÃO
