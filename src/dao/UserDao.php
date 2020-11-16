@@ -2,11 +2,10 @@
 
 namespace Devbook\dao;
 
-use Devbook\interfaces\UserInterface;
-use Devbook\models\Session;
-use Devbook\models\User;
 use PDO;
 use stdClass;
+use Devbook\models\User;
+use Devbook\interfaces\UserInterface;
 
 class UserDao implements UserInterface
 {
@@ -65,30 +64,31 @@ class UserDao implements UserInterface
         return $newUser;
     }
 
-    public function registerToken(string $token, int $id): void
-    {
-        $query = $this->pdo->prepare('UPDATE users SET token = :TOKEN WHERE id = :ID');
-        $query->bindParam(':TOKEN', $token, PDO::PARAM_STR);
-        $query->bindParam(':ID', $id, PDO::PARAM_INT);
-        if ($query->execute()) {
-            Session::set('TOKEN', $token);
-        }
-    }
+//    public function registerToken(string $token, int $id): void
+//    {
+//        $query = $this->pdo->prepare('UPDATE users SET token = :TOKEN WHERE id = :ID');
+//        $query->bindParam(':TOKEN', $token, PDO::PARAM_STR);
+//        $query->bindParam(':ID', $id, PDO::PARAM_INT);
+//        if ($query->execute()) {
+//            Session::set('TOKEN', $token);
+//        }
+//    }
 
     public function update(User $user): bool
     {
         $query = $this->pdo->prepare(
-            'UPDATE users SET
-                email = :EMAIL,
-                password = :PASSWORD,
-                name = :NAME,
-                city = :CITY,
-                birthdate = :BIRTHDATE,
-                work = :WORK,
-                avatar = :AVATAR,
-                cover = :COVER,
-                token = :TOKEN
-            WHERE id = :ID'
+            'UPDATE users
+            SET email       = :EMAIL,
+                password    = :PASSWORD,
+                name        = :NAME,
+                city        = :CITY,
+                birthdate   = :BIRTHDATE,
+                work        = :WORK,
+                avatar      = :AVATAR,
+                cover       = :COVER,
+                token       = :TOKEN
+            WHERE 
+                id          = :ID'
         );
 
         $query->bindValue(':ID', $user->getId(), PDO::PARAM_INT);

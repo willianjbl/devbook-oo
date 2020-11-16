@@ -83,3 +83,39 @@ form a {
     text-decoration:none;
     color:#4a76a8;
 }
+
+/******************************************************
+                        FLASH
+******************************************************/
+.flash-box {
+    display: none;
+    font-weight: 600;
+    max-width: 500px;
+    margin: 0 auto;
+}
+.flash {
+    position: absolute;
+    top: 45px;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: inherit;
+    width: 100%;
+    margin: 14px auto 5px auto;
+    box-shadow: 3px 4px 7px 0 #7d7676;
+    text-align: center;
+}
+.flash-danger {
+    border: 2px solid #FF0000;
+    background-color: #ffcccc;
+    color: #9a0c0c;
+}
+.flash-success {
+    border: 2px solid #0b560b;
+    background-color: #c2f3b7;
+    color: #0b560b;
+}
+.flash-warning {
+    border: 2px solid #d4d804;
+    background-color: #eeedab;
+    color: #7d7f03;
+}

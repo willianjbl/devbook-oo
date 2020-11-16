@@ -15,20 +15,19 @@ class Common
 
     public static function flash(string $type, string $message): void
     {
-        Session::set('FLASH_TYPE', $type);
-        Session::set('FLASH_MESSAGE', $message);
+        if (!empty($type) && !empty($message)) {
+            Session::set('FLASH', ['message' => $message, 'type' => $type]);
+        }
     }
 
     public static function getFlash(): array
     {
-        $tempMessage = [];
+        $flash = [];
 
-        if (!empty(Session::get('FLASH_MESSAGE'))) {
-            $tempMessage['type'] = Session::get('FLASH_TYPE');
-            $tempMessage['message'] = Session::get('FLASH_MESSAGE');
-            Session::remove('FLASH_MESSAGE');
-            Session::remove('FLASH_TYPE');
+        if (!empty(Session::get('FLASH'))) {
+            $flash = Session::get('FLASH');
+            Session::remove('FLASH');
         }
-        return $tempMessage;
+        return $flash;
     }
 }

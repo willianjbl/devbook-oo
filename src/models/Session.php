@@ -9,15 +9,15 @@ class Session
         session_start();
     }
 
-    public static function get(string $key): string
+    public static function get(string $key)
     {
         if (!empty($_SESSION[$key])) {
             return $_SESSION[$key];
         }
-        return '';
+        return false;
     }
 
-    public static function set(string $key, string $value): void
+    public static function set(string $key, $value): void
     {
         $_SESSION[$key] = $value;
     }

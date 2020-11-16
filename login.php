@@ -20,7 +20,7 @@
 <section class="container main">
 
     <div class="flash-box" <?= !empty($flash['message']) ? 'style="display:block"' : '' ?>>
-        <div class="flash <?= !empty($flash['type']) ? "flash-{$flash['type']}" : '' ?>">
+        <div class="flash <?= !empty($flash['type']) ? "{$flash['type']}" : '' ?>">
             <?= $flash['message'] ?? '' ?>
         </div>
     </div>
@@ -36,5 +36,6 @@
         <a href="<?= BASE ?>/signup.php">Ainda não tem conta? Cadastre-se</a>
     </form>
 </section>
+<script src="<?= BASE ?>/assets/js/flash.js"></script>
 </body>
 </html>

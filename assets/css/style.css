@@ -391,6 +391,41 @@ header .head-side {
     margin:0;
 }
 
+/******************************************************
+                        FLASH
+******************************************************/
+.flash-box {
+    display: none;
+    font-weight: 600;
+    max-width: 500px;
+    margin: 0 auto;
+}
+.flash {
+    padding: 10px;
+    border-radius: 10px;
+    position: absolute;
+    max-width: inherit;
+    width: 100%;
+    margin: 14px auto 5px auto;
+    box-shadow: 3px 4px 7px 0 #7d7676;
+    text-align: center;
+}
+.flash-danger {
+    border: 2px solid #FF0000;
+    background-color: #ffcccc;
+    color: #9a0c0c;
+}
+.flash-success {
+    border: 2px solid #0b560b;
+    background-color: #c2f3b7;
+    color: #0b560b;
+}
+.flash-warning {
+    border: 2px solid #d4d804;
+    background-color: #eeedab;
+    color: #7d7f03;
+}
+
 @media (max-width: 992px) {
     header .head-side-right {
         display:none !important;
@@ -477,5 +512,4 @@ header .head-side {
     .full-user-photos {
         grid-template-columns: repeat(1, 1fr);
     }
-
 }
