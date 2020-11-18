@@ -13,7 +13,11 @@ class MySql extends PDO
             return parent::__construct(
                 'mysql:dbname=' . self::DB_NAME . ';host=' . self::DB_HOST,
                 self::DB_USER,
-                self::DB_PASS
+                self::DB_PASS, [
+                    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'utf8\'',
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
+                ]
             );
         } catch (PDOException $e) {
             $erro = utf8_encode($e->getMessage());

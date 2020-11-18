@@ -28,7 +28,7 @@ $flash = \Devbook\functions\Common::getFlash();
 
     <form method="POST" action="<?= BASE ?>/signup_action.php">
 
-        <input placeholder="Digite seu Nome Completo" class="input" type="password" name="password" />
+        <input placeholder="Digite seu Nome Completo" class="input" type="text" name="name" />
 
         <input placeholder="Digite seu E-mail" class="input" type="email" name="email" />
 

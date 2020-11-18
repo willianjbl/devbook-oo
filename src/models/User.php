@@ -11,11 +11,11 @@ class User
     private string $email;
     private string $password;
     private string $birthdate;
-    private string $city;
-    private string $work;
+    private ?string $city;
+    private ?string $work;
     private string $avatar;
     private string $cover;
-    private string $token;
+    private ?string $token;
 
     /**
      * @return int
@@ -112,7 +112,10 @@ class User
      */
     public function getCity(): ?string
     {
-        return $this->city;
+        if (!empty($this->city)) {
+            return $this->city;
+        }
+        return null;
     }
 
     /**
@@ -130,7 +133,10 @@ class User
      */
     public function getWork(): ?string
     {
-        return $this->work;
+        if (!empty($this->work)) {
+            return $this->work;
+        }
+        return null;
     }
 
     /**
@@ -184,7 +190,10 @@ class User
      */
     public function getToken(): ?string
     {
-        return $this->token;
+        if (!empty($this->token)) {
+            return $this->token;
+        }
+        return null;
     }
 
     /**

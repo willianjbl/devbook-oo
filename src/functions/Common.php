@@ -30,4 +30,19 @@ class Common
         }
         return $flash;
     }
+
+    public static function renderPartial(string $path, array $data = []): void
+    {
+        if (!empty($data) ) {
+            if (!empty(array_keys($data))) {
+                foreach ($data as $key => $value) {
+                    $$key = $value;
+                }
+            }
+        } else {
+            unset($data);
+        }
+
+        require "partials/$path.php";
+    }
 }

@@ -8,12 +8,16 @@ function verificarCampoSenha() {
     let senha = document.querySelector('input[name="password"]');
     let reSenha = document.querySelector('input[name="repassword"]');
 
-    if (senha.value !== reSenha.value) {
-        senha.value = '';
-        reSenha.value = '';
-        senha.focus();
-        dispararAlerta('As senhas não coincidem!', 'warning');
+    if (reSenha.value) {
+        if (senha.value !== reSenha.value) {
+            senha.value = '';
+            reSenha.value = '';
+            senha.focus();
+            dispararAlerta('As senhas não coincidem!', 'warning');
+        }
     }
 }
 
-document.querySelector('input[name="repassword"]').addEventListener('blur', verificarCampoSenha);
+document.querySelectorAll('input[name="repassword"], input[name="password"]').forEach(el => {
+    el.addEventListener('blur', verificarCampoSenha);
+});

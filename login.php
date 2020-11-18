@@ -19,11 +19,7 @@
 </header>
 <section class="container main">
 
-    <div class="flash-box" <?= !empty($flash['message']) ? 'style="display:block"' : '' ?>>
-        <div class="flash <?= !empty($flash['type']) ? "{$flash['type']}" : '' ?>">
-            <?= $flash['message'] ?? '' ?>
-        </div>
-    </div>
+    <?php \Devbook\functions\Common::renderPartial('flash',['flash' => $flash]); ?>
 
     <form method="POST" action="<?= BASE ?>/login_action.php">
 

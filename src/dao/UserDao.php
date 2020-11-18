@@ -29,6 +29,7 @@ class UserDao implements UserInterface
         $newUser->setWork($user->work ?? null);
         $newUser->setAvatar($user->avatar ?? null);
         $newUser->setCover($user->cover ?? null);
+        $newUser->setToken($user->token ?? null);
 
         return $newUser;
     }
@@ -45,6 +46,15 @@ class UserDao implements UserInterface
             $newUser = $this->generateUser($newUser, $user);
         }
         return $newUser;
+    }
+
+    public function findUserByEmail(string $email): bool
+    {
+        $emailbd = $this->pdo->prepare('SELECT email FROM users WHERE email = :EMAIL');
+        $emailbd->bindParam(':EMAIL', $email, PDO::PARAM_STR);
+        $emailbd->execute();
+
+        return $emailbd->rowCount() > 0;
     }
 
     public function checkLogin($email, $password): User
@@ -76,8 +86,8 @@ class UserDao implements UserInterface
 
     public function update(User $user): bool
     {
-        $query = $this->pdo->prepare(
-            'UPDATE users
+        $query = $this->pdo->prepare('
+            UPDATE users
             SET email       = :EMAIL,
                 password    = :PASSWORD,
                 name        = :NAME,
@@ -88,8 +98,8 @@ class UserDao implements UserInterface
                 cover       = :COVER,
                 token       = :TOKEN
             WHERE 
-                id          = :ID'
-        );
+                id          = :ID
+        ');
 
         $query->bindValue(':ID', $user->getId(), PDO::PARAM_INT);
         $query->bindValue(':EMAIL', $user->getEmail(), PDO::PARAM_STR);
@@ -100,6 +110,25 @@ class UserDao implements UserInterface
         $query->bindValue(':WORK', $user->getWork(), PDO::PARAM_STR);
         $query->bindValue(':COVER', $user->getCover(), PDO::PARAM_STR);
         $query->bindValue(':AVATAR', $user->getAvatar(), PDO::PARAM_STR);
+        $query->bindValue(':TOKEN', $user->getToken(), PDO::PARAM_STR);
+        return $query->execute();
+    }
+
+    public function insert(User $user): bool
+    {
+        $query = $this->pdo->prepare('
+            INSERT INTO users (
+                name, email, password, birthdate, token
+            )
+            VALUES (
+                :NAME, :EMAIL, :PASSWORD, :BIRTHDATE, :TOKEN
+            )
+        ');
+
+        $query->bindValue(':NAME', $user->getName(), PDO::PARAM_STR);
+        $query->bindValue(':EMAIL', $user->getEmail(), PDO::PARAM_STR);
+        $query->bindValue(':PASSWORD', $user->getPassword(), PDO::PARAM_STR);
+        $query->bindValue(':BIRTHDATE', $user->getBirthdate(), PDO::PARAM_STR);
         $query->bindValue(':TOKEN', $user->getToken(), PDO::PARAM_STR);
         return $query->execute();
     }
