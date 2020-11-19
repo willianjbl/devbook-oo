@@ -186,7 +186,7 @@ var VanillaModal = (function () {
     _getElementContext: {
 
       /**
-       * @param e
+       * @param {mixed} e
        */
       value: function GetElementContext(e) {
         if (e && typeof e.hash === "string") {
@@ -222,7 +222,10 @@ var VanillaModal = (function () {
     },
     _close: {
 
-      value: function Close() {
+      /**
+       * @param {Event} e
+       */
+      value: function Close(e) {
         if (typeof this.$$.onBeforeClose === "function") this.$$.onBeforeClose.call(this);
         this._removeClass(this.$.page, this.$$["class"]);
         if (this.$$.transitions && this.$$.transitionEnd) {
@@ -303,7 +306,7 @@ var VanillaModal = (function () {
       value: function OutsideClickHandler(e) {
         if (this.$$.clickOutside !== true) return;
         var node = e.target;
-        while (node !== document.body) {
+        while (node != document.body) {
           if (node === this.$.modalInner) return;
           node = node.parentNode;
         }
@@ -416,5 +419,3 @@ var VanillaModal = (function () {
     window.VanillaModal = VanillaModal;
   }
 })();
-
-var modal = new VanillaModal();

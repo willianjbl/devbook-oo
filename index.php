@@ -13,4 +13,20 @@ Common::renderPartial('header', [
     'user' => $user
 ]);
 Common::renderPartial('menu', ['activeMenu' => 'home']);
+Common::renderFlash();
+?>
+
+<section class="feed mt-10">
+    <div class="row">
+        <div class="column pr-5">
+            <?php Common::renderPartial('new-post', ['user' => $user]); ?>
+            <?php Common::renderPartial('feed', ['user' => $user]); ?>
+        </div>
+        <div class="column side pl-5">
+            <?php Common::renderPartial('notifications'); ?>
+        </div>
+    </div>
+</section>
+
+<?php
 Common::renderPartial('footer');

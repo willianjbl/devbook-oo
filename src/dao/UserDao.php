@@ -3,9 +3,9 @@
 namespace Devbook\dao;
 
 use PDO;
-use stdClass;
 use Devbook\models\User;
 use Devbook\interfaces\UserInterface;
+use Devbook\functions\CommonValidation;
 
 class UserDao implements UserInterface
 {
@@ -18,7 +18,7 @@ class UserDao implements UserInterface
         }
     }
 
-    private function generateUser(User $newUser, StdClass $user): User
+    private function generateUser(User $newUser, \StdClass $user): User
     {
         $newUser->setId($user->id ?? null);
         $newUser->setName($user->name ?? null);
@@ -74,16 +74,6 @@ class UserDao implements UserInterface
         return $newUser;
     }
 
-//    public function registerToken(string $token, int $id): void
-//    {
-//        $query = $this->pdo->prepare('UPDATE users SET token = :TOKEN WHERE id = :ID');
-//        $query->bindParam(':TOKEN', $token, PDO::PARAM_STR);
-//        $query->bindParam(':ID', $id, PDO::PARAM_INT);
-//        if ($query->execute()) {
-//            Session::set('TOKEN', $token);
-//        }
-//    }
-
     public function update(User $user): bool
     {
         $query = $this->pdo->prepare('
@@ -111,7 +101,8 @@ class UserDao implements UserInterface
         $query->bindValue(':COVER', $user->getCover(), PDO::PARAM_STR);
         $query->bindValue(':AVATAR', $user->getAvatar(), PDO::PARAM_STR);
         $query->bindValue(':TOKEN', $user->getToken(), PDO::PARAM_STR);
-        return $query->execute();
+
+        return CommonValidation::validateQuery($query);
     }
 
     public function insert(User $user): bool
@@ -130,6 +121,7 @@ class UserDao implements UserInterface
         $query->bindValue(':PASSWORD', $user->getPassword(), PDO::PARAM_STR);
         $query->bindValue(':BIRTHDATE', $user->getBirthdate(), PDO::PARAM_STR);
         $query->bindValue(':TOKEN', $user->getToken(), PDO::PARAM_STR);
-        return $query->execute();
+
+        return CommonValidation::validateQuery($query);
     }
 }

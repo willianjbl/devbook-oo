@@ -31,6 +31,11 @@ class Common
         return $flash;
     }
 
+    public static function renderFlash(): void
+    {
+        require "partials/flash.php";
+    }
+
     public static function renderPartial(string $path, array $data = []): void
     {
         if (!empty($data) ) {
@@ -43,6 +48,8 @@ class Common
             unset($data);
         }
 
-        require "partials/$path.php";
+        if (!empty($path)) {
+            require "partials/$path.php";
+        }
     }
 }

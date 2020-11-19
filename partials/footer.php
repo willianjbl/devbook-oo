@@ -5,7 +5,11 @@
         <div class="modal-content"></div>
     </div>
 </div>
-<script type="text/javascript" src="assets/js/script.js"></script>
-<script type="text/javascript" src="assets/js/vanillaModal.js"></script>
+<script>
+    const BASE = "<?= BASE ?>";
+</script>
+<script type="text/javascript" src="<?= BASE ?>/assets/js/script.js"></script>
+<script type="text/javascript" src="<?= BASE ?>/assets/js/vanillaModal.js"></script>
+<script src="<?= BASE ?>/assets/js/flash.js"></script>
 </body>
 </html>

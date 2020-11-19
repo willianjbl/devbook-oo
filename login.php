@@ -1,13 +1,12 @@
 <?php
     require 'config/config.php';
-
-    $flash = \Devbook\functions\Common::getFlash();
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="utf-8" />
-    <title>Devbook | Login</title>
+    <title>Devsbook | Login</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"/>
     <link rel="stylesheet" href="<?= BASE ?>/assets/css/login.css" />
 </head>
@@ -19,7 +18,7 @@
 </header>
 <section class="container main">
 
-    <?php \Devbook\functions\Common::renderPartial('flash',['flash' => $flash]); ?>
+    <?php \Devbook\functions\Common::renderFlash(); ?>
 
     <form method="POST" action="<?= BASE ?>/login_action.php">
 

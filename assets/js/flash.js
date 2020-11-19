@@ -1,3 +1,5 @@
+let flashTimeOut = 3 * 1000;
+
 function dispararAlerta(body, status) {
     let box = document.querySelector('.flash-box');
     let flash = box.querySelector('.flash');
@@ -14,19 +16,19 @@ function dispararAlerta(body, status) {
 
     setTimeout(() => {
         closeFlashComment(box);
-    }, 3500);
+    }, flashTimeOut);
 }
 
 function closeFlashComment(el) {
     el.style.display = 'none';
 }
 
-let el = document.querySelector('.flash-box');
-if (el && el.style.display === 'block') {
-    el.addEventListener('click', () => {
-        closeFlashComment(el);
+let flashBox = document.querySelector('.flash-box');
+if (flashBox && flashBox.style.display === 'block') {
+    flashBox.addEventListener('click', () => {
+        closeFlashComment(flashBox);
     });
     setTimeout(() => {
-        closeFlashComment(el);
-    }, 3500);
+        closeFlashComment(flashBox);
+    }, flashTimeOut);
 }

@@ -8,7 +8,7 @@ $flash = \Devbook\functions\Common::getFlash();
 <html lang="pt-br">
 <head>
     <meta charset="utf-8" />
-    <title>Devbook | Sign-Up</title>
+    <title>Devsbook | Sign-Up</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"/>
     <link rel="stylesheet" href="<?= BASE ?>/assets/css/login.css" />
 </head>

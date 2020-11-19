@@ -21,7 +21,7 @@ if ($name && $email && $password && $birthdate) {
     if (!empty($birthdate)) {
         if (!$auth->emailExists($email)) {
             if ($auth->registerUser($name, $email, $password, $birthdate)) {
-                Common::flash(FLASH_SUCCESS, "Bem vindo(a) $name!");
+                Common::flash(FLASH_SUCCESS, "Bem-vindo(a) $name!");
                 Common::redirect();
             } else {
                 Common::flash(FLASH_ERROR, 'Falha ao realizar cadastro!');
