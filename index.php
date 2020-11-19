@@ -8,6 +8,11 @@ require 'config/config.php';
 $auth = new Auth($pdo);
 $user = $auth->verifyToken();
 
+$postDao = new \Devbook\dao\PostDao($pdo);
+print_r($postDao->getHomeFeed($user->getId()));
+exit;
+
+
 Common::renderPartial('header', [
     'title' => 'Feed',
     'user' => $user

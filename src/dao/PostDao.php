@@ -11,10 +11,33 @@ class PostDao implements PostInterface
 {
     private PDO $pdo;
 
-    public function __construct(PDO $pdo) {
+    public function __construct(PDO $pdo)
+    {
         if (empty($this->pdo)) {
             $this->pdo = $pdo;
         }
+    }
+
+    public function getHomeFeed(int $loggedUserId): array
+    {
+        $array = [];
+
+        $userRelationDao = new UserRelationDao($this->pdo);
+        $userList = $userRelationDao->listRelationsFrom($loggedUserId);
+
+        $query = $this->pdo->query('
+            SELECT * FROM posts
+            WHERE user_id IN (' . implode(',', $userList) . ')
+            ORDER BY created_at DESC
+        ');
+
+        if ($query->rowCount() > 0) {
+            foreach ($query->fetchAll() as $row) {
+                $newPost = new Post();
+                $array['posts'][] = $this->generatePost($newPost, $row);
+            }
+        }
+        return $array;
     }
 
     private function generatePost(Post $newPost, \StdClass $post): Post
