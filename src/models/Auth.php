@@ -3,7 +3,7 @@
 namespace Devbook\models;
 
 use Devbook\dao\UserDao;
-use Devbook\functions\Common;
+use Devbook\utility\Common;
 use PDO;
 
 class Auth

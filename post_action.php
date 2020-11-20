@@ -1,7 +1,7 @@
 <?php
 
 use Devbook\dao\PostDao;
-use Devbook\functions\Common;
+use Devbook\utility\Common;
 use Devbook\models\{
     Auth,
     Post

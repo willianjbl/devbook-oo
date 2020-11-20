@@ -5,7 +5,7 @@ namespace Devbook\dao;
 use PDO;
 use Devbook\models\Post;
 use Devbook\interfaces\PostInterface;
-use Devbook\functions\CommonValidation;
+use Devbook\utility\CommonValidation;
 
 class PostDao implements PostInterface
 {
@@ -17,12 +17,43 @@ class PostDao implements PostInterface
             $this->pdo = $pdo;
         }
     }
+    
+    public function getProfileFeed(int $userId): array
+    {
+        $feed = [];
+        $userRelationDao = new UserRelationDao($this->pdo);
+        $userDao = new UserDao($this->pdo);
+        $userList = $userRelationDao->listRelationsFrom($userId);
+
+        $query = $this->pdo->prepare('
+            SELECT * FROM posts
+            WHERE user_id = :ID
+            ORDER BY created_at DESC
+        ');
+        $query->bindParam(':ID', $userId, PDO::PARAM_INT);
+        $query->execute();
+
+        if ($query->rowCount() > 0) {
+            foreach ($query->fetchAll() as $row) {
+                $post = $this->generatePost($row);
+                $post->setAuthor($userDao->findUserById($post->getUserId()));
+                $post->likeCount = 0;
+                $post->comments = [];
+
+                if ($post->getUserId() === $userId) {
+                    $post->isAuthor = true;
+                }
+                $feed[] = $post;
+            }
+        }
+        return $feed;
+    }
 
     public function getHomeFeed(int $loggedUserId): array
     {
-        $array = [];
-
+        $feed = [];
         $userRelationDao = new UserRelationDao($this->pdo);
+        $userDao = new UserDao($this->pdo);
         $userList = $userRelationDao->listRelationsFrom($loggedUserId);
 
         $query = $this->pdo->query('
@@ -33,15 +64,23 @@ class PostDao implements PostInterface
 
         if ($query->rowCount() > 0) {
             foreach ($query->fetchAll() as $row) {
-                $newPost = new Post();
-                $array['posts'][] = $this->generatePost($newPost, $row);
+                $post = $this->generatePost($row);
+                $post->setAuthor($userDao->findUserById($post->getUserId()));
+                $post->likeCount = 0;
+                $post->comments = [];
+
+                if ($post->getUserId() === $loggedUserId) {
+                    $post->isAuthor = true;
+                }
+                $feed[] = $post;
             }
         }
-        return $array;
+        return $feed;
     }
 
-    private function generatePost(Post $newPost, \StdClass $post): Post
+    private function generatePost(\StdClass $post): Post
     {
+        $newPost = new Post();
         $newPost->setId($post->id ?? null);
         $newPost->setUserId($post->user_id ?? null);
         $newPost->setType($post->type ?? null);
@@ -77,5 +116,19 @@ class PostDao implements PostInterface
     public function delete(Post $post): bool
     {
         // TODO: Implement delete() method.
+    }
+
+    public function getPhotosFrom(int $id): array
+    {
+        $photos = [];
+
+        $query = $this->pdo->prepare("SELECT * FROM posts WHERE type = 'photo' AND user_id = :ID");
+        $query->bindParam(':ID', $id, PDO::PARAM_INT);
+        $query->execute();
+
+        if ($query->rowCount() > 0) {
+            $photos = $query->fetchAll();
+        }
+        return $photos;
     }
 }

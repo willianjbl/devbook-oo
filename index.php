@@ -1,6 +1,6 @@
 <?php
 
-use Devbook\functions\Common;
+use Devbook\utility\Common;
 use Devbook\models\Auth;
 
 require 'config/config.php';
@@ -9,9 +9,7 @@ $auth = new Auth($pdo);
 $user = $auth->verifyToken();
 
 $postDao = new \Devbook\dao\PostDao($pdo);
-print_r($postDao->getHomeFeed($user->getId()));
-exit;
-
+$feed = $postDao->getHomeFeed($user->getId());
 
 Common::renderPartial('header', [
     'title' => 'Feed',
@@ -24,8 +22,18 @@ Common::renderFlash();
 <section class="feed mt-10">
     <div class="row">
         <div class="column pr-5">
-            <?php Common::renderPartial('new-post', ['user' => $user]); ?>
-            <?php Common::renderPartial('feed', ['user' => $user]); ?>
+
+            <?php
+                Common::renderPartial('new-post', ['user' => $user]);
+
+                foreach ($feed as $feedItem) {
+                    Common::renderPartial('feed', [
+                        'user' => $user,
+                        'feed' => $feedItem
+                    ]);
+                }
+            ?>
+
         </div>
         <div class="column side pl-5">
             <?php Common::renderPartial('notifications'); ?>

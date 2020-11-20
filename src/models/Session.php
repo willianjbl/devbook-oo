@@ -24,7 +24,9 @@ class Session
 
     public static function remove(string $key): void
     {
-        unset($_SESSION[$key]);
+        if (!empty($_SESSION[$key])) {
+            unset($_SESSION[$key]);
+        }
     }
 
     public static function destroy(): void

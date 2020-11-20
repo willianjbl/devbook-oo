@@ -1,6 +1,6 @@
 <?php
 
-namespace Devbook\functions;
+namespace Devbook\utility;
 
 class CommonDate
 {
@@ -28,6 +28,17 @@ class CommonDate
                 $date = "{$date[2]}/{$date[1]}/{$date[0]}";
                 return $date;
             }
+            return '';
+        } catch (\Throwable $e) {
+            return '';
+        }
+    }
+
+    public static function brazilianDateTimeConvert(string $date): string
+    {
+        try {
+            $date = new \DateTime($date);
+            return $date->format('d/m/Y H:i:s');
         } catch (\Throwable $e) {
             return '';
         }

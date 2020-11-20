@@ -18,7 +18,7 @@
 </header>
 <section class="container main">
 
-    <?php \Devbook\functions\Common::renderFlash(); ?>
+    <?php \Devbook\utility\Common::renderFlash(); ?>
 
     <form method="POST" action="<?= BASE ?>/login_action.php">
 

@@ -1,7 +1,7 @@
 <?php
 
 use Devbook\models\Auth;
-use Devbook\functions\{
+use Devbook\utility\{
     Common,
     CommonDate
 };

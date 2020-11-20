@@ -9,6 +9,27 @@ class Post
     private string $type;
     private string $body;
     private string $createdAt;
+    private User $author;
+    public bool $isAuthor = false;
+    public int $likeCount;
+    public bool $liked = false;
+    public array $comments;
+
+    /**
+     * @return User
+     */
+    public function getAuthor(): User
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param User $author
+     */
+    public function setAuthor(User $author): void
+    {
+        $this->author = $author;
+    }
 
     /**
      * @return int

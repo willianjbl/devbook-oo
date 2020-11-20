@@ -1,5 +1,5 @@
 <?php
-    $flash = \Devbook\functions\Common::getFlash();
+    $flash = \Devbook\utility\Common::getFlash();
 ?>
 
 <div class="flash-box" <?= !empty($flash['message']) ? 'style="display:block"' : '' ?>>

@@ -1,6 +1,6 @@
 <?php
 
-use Devbook\functions\Common;
+use Devbook\utility\Common;
 use Devbook\models\Auth;
 
 require 'config/config.php';

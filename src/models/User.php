@@ -16,6 +16,9 @@ class User
     private string $avatar;
     private string $cover;
     private ?string $token;
+    public array $followings;
+    public array $followers;
+    public array $photos;
 
     /**
      * @return int

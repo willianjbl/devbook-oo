@@ -5,7 +5,7 @@ namespace Devbook\dao;
 use PDO;
 use Devbook\models\User;
 use Devbook\interfaces\UserInterface;
-use Devbook\functions\CommonValidation;
+use Devbook\utility\CommonValidation;
 
 class UserDao implements UserInterface
 {
@@ -18,18 +18,32 @@ class UserDao implements UserInterface
         }
     }
 
-    private function generateUser(User $newUser, \StdClass $user): User
-    {
+    private function generateUser(
+        User $newUser,
+        \StdClass $user,
+        bool $returnPass = false,
+        bool $returnRelated = false
+    ): User {
+        if ($returnPass) {
+            $newUser->setPassword($user->password ?? null);
+        }
         $newUser->setId($user->id ?? null);
         $newUser->setName($user->name ?? null);
         $newUser->setEmail($user->email ?? null);
-        $newUser->setPassword($user->password ?? null);
         $newUser->setBirthdate($user->birthdate ?? null);
         $newUser->setCity($user->city ?? null);
         $newUser->setWork($user->work ?? null);
         $newUser->setAvatar($user->avatar ?? null);
         $newUser->setCover($user->cover ?? null);
         $newUser->setToken($user->token ?? null);
+
+        if ($returnRelated) {
+            $userRelationDao = new UserRelationDao($this->pdo);
+            $postDao = new PostDao($this->pdo);
+            $newUser->followings = $userRelationDao->getFollowings($newUser->getId());
+            $newUser->followers = $userRelationDao->getFollowers($newUser->getId());
+            $newUser->photos = $postDao->getPhotosFrom($newUser->getId());
+        }
 
         return $newUser;
     }
@@ -68,7 +82,7 @@ class UserDao implements UserInterface
             $user = $user->fetch();
 
             if (password_verify($password, $user->password)) {
-                $newUser = $this->generateUser($newUser, $user);
+                $newUser = $this->generateUser($newUser, $user, true);
             }
         }
         return $newUser;
@@ -123,5 +137,18 @@ class UserDao implements UserInterface
         $query->bindValue(':TOKEN', $user->getToken(), PDO::PARAM_STR);
 
         return CommonValidation::validateQuery($query);
+    }
+
+    public function findUserById(int $id, bool $returnRelation = false): User
+    {
+        $query = $this->pdo->prepare('SELECT * FROM users WHERE id = :ID');
+        $query->bindParam(':ID', $id, PDO::PARAM_INT);
+        $query->execute();
+        $newUser = new User();
+
+        if ($query->rowCount() > 0) {
+            $newUser = $this->generateUser($newUser, $query->fetch(), false, $returnRelation);
+        }
+        return $newUser;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Devbook\functions;
+namespace Devbook\utility;
 
 use Devbook\models\Session;
 

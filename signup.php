@@ -1,7 +1,7 @@
 <?php
 require 'config/config.php';
 
-$flash = \Devbook\functions\Common::getFlash();
+$flash = \Devbook\utility\Common::getFlash();
 ?>
 
 <!DOCTYPE html>

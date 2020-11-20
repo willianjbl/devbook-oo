@@ -2,7 +2,7 @@
     <div class="box-body">
         <div class="feed-new-editor m-10 row">
             <div class="feed-new-avatar">
-                <img src="<?= BASE ?>/media/avatars/<?= $user->getAvatar() ?>"  alt=""/>
+                <img src="<?= BASE ?>/media/avatars/<?= $user->getAvatar() ?>" alt=""/>
             </div>
             <div class="feed-new-input-placeholder">O que você está pensando, <?= $user->getName() ?>?</div>
             <div class="feed-new-input" contenteditable="true"></div>

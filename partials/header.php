@@ -24,7 +24,7 @@
                     <a href="" class="user-area">
                         <div class="user-area-text"><?= $user->getName() ?></div>
                         <div class="user-area-icon">
-                            <img src="<?= BASE ?>/media/avatars/<?= $user->getAvatar() ?>"  alt="Avatar"/>
+                            <img src="<?= BASE ?>/media/avatars/<?= $user->getAvatar() ?>" alt="Avatar"/>
                         </div>
                     </a>
                     <a href="<?= BASE ?>/logout.php" class="user-logout">
