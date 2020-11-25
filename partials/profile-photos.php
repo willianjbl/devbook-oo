@@ -14,10 +14,10 @@
             <?php for ($i = 0; $i < 6; $i++): ?>
                 <?php if (!empty($profileUser->photos[$i]->getBody())): ?>
                     <div class="user-photo-item">
-                        <a href="#modal-1" rel="modal:open">
+                        <a href="#modal-<?= $i ?>" rel="modal:open">
                             <img src="<?= BASE ?>/media/uploads/<?= $profileUser->photos[$i]->getBody() ?>"  alt="<?= $profileUser->photos[$i]->getBody() ?>"/>
                         </a>
-                        <div id="modal-1" style="display:none">
+                        <div id="modal-<?= $i ?>" style="display:none">
                             <img src="<?= BASE ?>/media/uploads/<?= $profileUser->photos[$i]->getBody() ?>>"  alt="<?= $profileUser->photos[$i]->getBody() ?>"/>
                         </div>
                     </div>

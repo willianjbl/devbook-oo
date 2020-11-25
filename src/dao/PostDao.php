@@ -131,4 +131,29 @@ class PostDao implements PostInterface
         }
         return $photos;
     }
+
+    public function searchPosts($searchTerm, int $loggedUserId): array
+    {
+        $result = [];
+        $query = $this->pdo->prepare("
+            SELECT U.id, U.name, U.avatar,
+                   P.id, P.body, P.created_at
+            FROM       posts AS P
+            INNER JOIN users AS U
+            ON         P.user_id = U.id
+            INNER JOIN user_relations AS UR
+            ON         U.id = UR.user_to
+            WHERE P.body     LIKE :BODY AND
+                  P.type        = 'text' AND
+                  UR.user_from  = :ID
+        ");
+        $query->bindValue(':BODY', "%$searchTerm%", PDO::PARAM_STR);
+        $query->bindParam(':ID', $loggedUserId, PDO::PARAM_INT);
+        $query->execute();
+
+        if ($query->rowCount() > 0) {
+            $result = $query->fetchAll();
+        }
+        return $result;
+    }
 }

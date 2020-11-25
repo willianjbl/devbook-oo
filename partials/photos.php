@@ -5,12 +5,12 @@
                 <div class="box-body">
                     <div class="full-user-photos">
 
-                        <?php foreach ($profileUser->photos as $photo): ?>
+                        <?php foreach ($profileUser->photos as $key => $photo): ?>
                             <div class="user-photo-item">
-                                <a href="#modal-1" rel="modal:open">
+                                <a href="#modal-<?= $key ?>" rel="modal:open">
                                     <img src="<?= BASE ?>/media/uploads/<?= $photo->getBody() ?>"  alt="<?= $photo->getBody() ?>"/>
                                 </a>
-                                <div id="modal-1" style="display:none">
+                                <div id="modal-<?= $key ?>" style="display:none">
                                     <img src="<?= BASE ?>/media/uploads/<?= $photo->getBody() ?>>"  alt="<?= $photo->getBody() ?>"/>
                                 </div>
                             </div>

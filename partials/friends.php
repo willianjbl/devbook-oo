@@ -2,7 +2,6 @@
     <div class="column">
         <div class="box">
             <div class="box-body">
-
                 <div class="tabs">
                     <div class="tab-item" data-for="followers">
                         Seguidores
@@ -32,7 +31,6 @@
                             <?php endforeach; ?>
 
                         </div>
-
                     </div>
                     <div class="tab-body" data-item="following">
 

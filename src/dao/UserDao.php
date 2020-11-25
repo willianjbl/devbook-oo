@@ -149,4 +149,26 @@ class UserDao implements UserInterface
         }
         return $newUser;
     }
+
+    public function searchUsers($searchTerm, int $loggedUserId): array
+    {
+        $result = [];
+        $query = $this->pdo->prepare('
+            SELECT DISTINCT id, name, avatar
+            FROM users
+            WHERE name LIKE :NAME AND
+                  id     != :ID
+        ');
+        $query->bindValue(':NAME', "%$searchTerm%", PDO::PARAM_STR);
+        $query->bindParam(':ID', $loggedUserId, PDO::PARAM_INT);
+        $query->execute();
+
+        if ($query->rowCount() > 0) {
+            foreach ($query->fetchAll() as $user) {
+                $newUser = new User();
+                $result[] = $this->generateUser($newUser, $user);
+            }
+        }
+        return $result;
+    }
 }

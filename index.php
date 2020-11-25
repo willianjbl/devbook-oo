@@ -36,7 +36,9 @@ Common::renderFlash();
 
         </div>
         <div class="column side pl-5">
+
             <?php Common::renderPartial('notifications'); ?>
+
         </div>
     </div>
 </section>

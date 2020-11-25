@@ -1,0 +1,46 @@
+form#settings-form {
+    background-color: #FFF;
+    border: 1px solid #c9cacc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 1.3em;
+}
+
+form#settings-form h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+form#settings-form h3 {
+    font-size: 1.4em;
+    margin: 7px 0;
+}
+
+form#settings-form input {
+    display: block;
+    border: 1px solid #d0d0d0;
+    font-size:15px;
+    height:40px;
+    width: 100%;
+    outline: 0;
+    border-radius:10px;
+    padding:15px;
+    margin-bottom:10px;
+}
+
+form#settings-form input[type="file"] {
+    padding: 7px;
+}
+
+form#settings-form label {
+    margin-left: 2px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+form#settings-form hr {
+    margin: 20px 0;
+    border: none;
+    border-top: 1px solid;
+    border-color: #c7c5c5;
+}
