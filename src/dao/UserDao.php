@@ -44,7 +44,6 @@ class UserDao implements UserInterface
             $newUser->followers = $userRelationDao->getFollowers($newUser->getId());
             $newUser->photos = $postDao->getPhotosFrom($newUser->getId());
         }
-
         return $newUser;
     }
 
@@ -91,18 +90,17 @@ class UserDao implements UserInterface
     public function update(User $user): bool
     {
         $query = $this->pdo->prepare('
-            UPDATE users
-            SET email       = :EMAIL,
-                password    = :PASSWORD,
-                name        = :NAME,
-                city        = :CITY,
-                birthdate   = :BIRTHDATE,
-                work        = :WORK,
-                avatar      = :AVATAR,
-                cover       = :COVER,
-                token       = :TOKEN
-            WHERE 
-                id          = :ID
+            UPDATE  users
+            SET     email       = :EMAIL,
+                    password    = :PASSWORD,
+                    name        = :NAME,
+                    city        = :CITY,
+                    birthdate   = :BIRTHDATE,
+                    work        = :WORK,
+                    avatar      = :AVATAR,
+                    cover       = :COVER,
+                    token       = :TOKEN
+            WHERE   id          = :ID
         ');
 
         $query->bindValue(':ID', $user->getId(), PDO::PARAM_INT);

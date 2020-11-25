@@ -3,7 +3,6 @@ let flashTimeOut = 5 * 1000;
 function dispararAlerta(body, status) {
     let box = document.querySelector('.flash-box');
     let flash = box.querySelector('.flash');
-    // flash.classList.remove('flash-open');
     box.style.display = 'block';
 
     flash.classList.forEach(item => {

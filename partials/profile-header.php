@@ -11,18 +11,24 @@
                     <div class="profile-info-location"><?= $profileUser->getCity() ?? '' ?></div>
                 </div>
                 <div class="profile-info-data row">
-                    <div class="profile-info-item m-width-20">
-                        <div class="profile-info-item-n"><?= count($profileUser->followers) ?></div>
-                        <div class="profile-info-item-s">Seguidores</div>
-                    </div>
-                    <div class="profile-info-item m-width-20">
-                        <div class="profile-info-item-n"><?= count($profileUser->followings) ?></div>
-                        <div class="profile-info-item-s">Seguindo</div>
-                    </div>
-                    <div class="profile-info-item m-width-20">
-                        <div class="profile-info-item-n"><?= count($profileUser->photos) ?></div>
-                        <div class="profile-info-item-s">Fotos</div>
-                    </div>
+                    <a href="<?= BASE?>/friends.php?id=<?= $profileUser->getId() ?>">
+                        <div class="profile-info-item m-width-20">
+                            <div class="profile-info-item-n"><?= count($profileUser->followers) ?></div>
+                            <div class="profile-info-item-s">Seguidores</div>
+                        </div>
+                    </a>
+                    <a href="<?= BASE?>/friends.php?id=<?= $profileUser->getId() ?>">
+                        <div class="profile-info-item m-width-20">
+                            <div class="profile-info-item-n"><?= count($profileUser->followings) ?></div>
+                            <div class="profile-info-item-s">Seguindo</div>
+                        </div>
+                    </a>
+                    <a href="<?= BASE?>/photos.php?id=<?= $profileUser->getId() ?>">
+                        <div class="profile-info-item m-width-20">
+                            <div class="profile-info-item-n"><?= count($profileUser->photos) ?></div>
+                            <div class="profile-info-item-s">Fotos</div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>

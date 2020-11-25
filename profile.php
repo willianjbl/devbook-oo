@@ -49,14 +49,18 @@ Common::renderFlash();
                 <div class="column pl-5">
 
                     <?php
-                    Common::renderPartial('profile-photos', ['profileUser' => $profileUser]);
+                        Common::renderPartial('profile-photos', ['profileUser' => $profileUser]);
 
-                    foreach ($feed as $feedItem) {
-                        Common::renderPartial('feed', [
-                            'user' => $user,
-                            'feed' => $feedItem
-                        ]);
-                    }
+                        if ($profileId === $user->getId()) {
+                            Common::renderPartial('new-post', ['user' => $user]);
+                        }
+
+                        foreach ($feed as $feedItem) {
+                            Common::renderPartial('feed', [
+                                'user' => $user,
+                                'feed' => $feedItem
+                            ]);
+                        }
                     ?>
 
                 </div>
