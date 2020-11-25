@@ -94,15 +94,16 @@ form a {
     margin: 0 auto;
 }
 .flash {
-    position: absolute;
-    top: 45px;
     padding: 10px;
     border-radius: 10px;
+    position: fixed;
     max-width: inherit;
     width: 100%;
-    margin: 14px auto 5px auto;
+    margin: 14px auto 5px 38px;
     box-shadow: 3px 4px 7px 0 #7d7676;
     text-align: center;
+    opacity: 0;
+    top: 20px;
 }
 .flash-danger {
     border: 2px solid #FF0000;
@@ -118,4 +119,14 @@ form a {
     border: 2px solid #d4d804;
     background-color: #eeedab;
     color: #7d7f03;
+}
+.flash-open {
+    opacity: 1;
+    top: 45px;
+    transition: all 0.5s ease-in-out 0.5s;
+}
+.flash-close {
+    opacity: 0;
+    top: 31px;
+    transition: all 0.5s ease-in-out 0.5s;
 }
