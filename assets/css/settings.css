@@ -1,3 +1,12 @@
+button {
+    padding: 10px 15px;
+    background-color: #4a76a8;
+    color: #FFF;
+    border: none;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
 form#settings-form {
     background-color: #FFF;
     border: 1px solid #c9cacc;
@@ -40,7 +49,11 @@ form#settings-form label {
 
 form#settings-form hr {
     margin: 20px 0;
-    border: none;
+    border: none #c7c5c5;
     border-top: 1px solid;
-    border-color: #c7c5c5;
+}
+
+.settings-thumbnail {
+    max-width: 150px;
+    max-height: 100px;
 }

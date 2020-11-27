@@ -47,7 +47,7 @@ class UserDao implements UserInterface
         return $newUser;
     }
 
-    public function findUserByToken(string $token): User
+    public function findUserByToken(string $token, bool $returnPass = false): User
     {
         $user = $this->pdo->prepare('SELECT * FROM users WHERE token = :TOKEN');
         $user->bindParam(':TOKEN', $token, PDO::PARAM_STR);
@@ -56,7 +56,7 @@ class UserDao implements UserInterface
 
         if ($user->rowCount() > 0) {
             $user = $user->fetch();
-            $newUser = $this->generateUser($newUser, $user);
+            $newUser = $this->generateUser($newUser, $user, $returnPass);
         }
         return $newUser;
     }

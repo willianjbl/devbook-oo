@@ -9,7 +9,7 @@ class User
     private int $id;
     private string $name;
     private string $email;
-    private string $password;
+    private ?string $password;
     private string $birthdate;
     private ?string $city;
     private ?string $work;
@@ -79,7 +79,10 @@ class User
      */
     public function getPassword(): ?string
     {
-        return $this->password;
+        if (!empty($this->password)) {
+            return $this->password;
+        }
+        return null;
     }
 
     /**

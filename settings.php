@@ -11,14 +11,11 @@ require 'config/config.php';
 $auth = new Auth($pdo);
 $user = $auth->verifyToken();
 
-$postDao = new \Devbook\dao\PostDao($pdo);
-$feed = $postDao->getHomeFeed($user->getId());
-
 Common::renderPartial('header', [
-    'title' => 'Feed',
+    'title' => 'Settings',
     'user' => $user
 ]);
-Common::renderPartial('menu', ['activeMenu' => 'home']);
+Common::renderPartial('menu', ['activeMenu' => 'settings']);
 Common::renderFlash();
 ?>
     <link rel="stylesheet" href="<?= BASE ?>/assets/css/settings.css">
@@ -27,13 +24,15 @@ Common::renderFlash();
         <div class="row">
             <div class="column pr-5">
 
-                <form action="<?= BASE ?>/settings.php" method="post" id="settings-form" enctype="multipart/form-data">
+                <form action="<?= BASE ?>/settings_action.php" method="post" id="settings-form" enctype="multipart/form-data">
                     <h1>Configurações</h1>
                     <h3>Avatar</h3>
                     <input type="file" name="avatar" id="avatar">
+                    <img class="settings-thumbnail" src="<?= BASE ?>/media/avatars/<?= $user->getAvatar() ?>" alt="avatar do usuário">
                     <hr>
                     <h3>Imagem de Fundo</h3>
                     <input type="file" name="cover" id="cover">
+                    <img class="settings-thumbnail" src="<?= BASE ?>/media/covers/<?= $user->getCover() ?>" alt="fundo do perfil">
                     <hr>
                     <h3>Informações Pessoais</h3>
                     <label for="name">Nome:</label>

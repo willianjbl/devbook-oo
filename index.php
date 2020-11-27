@@ -1,5 +1,6 @@
 <?php
 
+use Devbook\dao\PostDao;
 use Devbook\utility\Common;
 use Devbook\models\Auth;
 
@@ -8,7 +9,7 @@ require 'config/config.php';
 $auth = new Auth($pdo);
 $user = $auth->verifyToken();
 
-$postDao = new \Devbook\dao\PostDao($pdo);
+$postDao = new PostDao($pdo);
 $feed = $postDao->getHomeFeed($user->getId());
 
 Common::renderPartial('header', [

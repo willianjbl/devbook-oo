@@ -20,9 +20,9 @@ class Auth
         $this->dao = new UserDao($this->pdo);
     }
 
-    public function verifyToken(): User
+    public function verifyToken(bool $returnPass = false): User
     {
-        $user = $this->dao->findUserByToken(Session::get('TOKEN'));
+        $user = $this->dao->findUserByToken(Session::get('TOKEN'), $returnPass);
 
         if ($user->isEmpty()) {
             Common::redirect('login');

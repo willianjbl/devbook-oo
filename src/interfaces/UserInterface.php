@@ -7,7 +7,7 @@ use Devbook\models\User;
 interface UserInterface
 {
     public function checkLogin($email, $password): User;
-    public function findUserByToken(string $token): User;
+    public function findUserByToken(string $token, bool $returnPass = false): User;
     public function findUserByEmail(string $email): bool;
     public function findUserById(int $id): User;
     public function update(User $user): bool;
