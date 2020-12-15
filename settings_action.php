@@ -1,9 +1,6 @@
 <?php
 
-use Devbook\utility\{
-    Common,
-    CommonDate
-};
+use Devbook\utility\{Common, CommonDate, CommonFile};
 use Devbook\models\Auth;
 use Devbook\dao\UserDao;
 
@@ -35,7 +32,7 @@ if ($name && $email && $birthdate) {
         Common::flash(FLASH_ERROR, 'Data inválida!');
     }
     if (!empty($password)) {
-        if ($password === $repassword) {
+        if ($password === $rePassword) {
             if (!password_verify($password, $user->getPassword())) {
                 $password = password_hash($password, PASSWORD_DEFAULT);
                 $user->setPassword($password);
@@ -51,6 +48,31 @@ if ($name && $email && $birthdate) {
             Common::flash(FLASH_ERROR, 'Este e-mail já está cadastrado!');
         }
     }
+
+    if (!empty(CommonFile::getFile('avatar'))) {
+        $avatar = CommonFile::getFile('avatar');
+        $avatarName = CommonFile::makeImage($avatar, 200, 200, 'avatar');
+        $path = './media/avatars';
+
+        if (is_file("$path/{$user->getAvatar()}")) {
+            if (unlink("$path/{$user->getAvatar()}")) {
+                $user->setAvatar($avatarName);
+            }
+        }
+    }
+
+    if (!empty(CommonFile::getFile('cover'))) {
+        $cover = CommonFile::getFile('cover');
+        $coverName = CommonFile::makeImage($cover, 850, 313, 'cover');
+        $path = './media/covers';
+
+        if (is_file("$path/{$user->getCover()}")) {
+            if (unlink("$path/{$user->getCover()}")) {
+                $user->setCover($coverName);
+            }
+        }
+    }
+
     if ($userDao->update($user)) {
         Common::flash(FLASH_SUCCESS, 'Dados alterados com sucesso!');
         Common::redirect('settings');

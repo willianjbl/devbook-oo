@@ -21,7 +21,7 @@ $profileUser = $profileId !== $user->getId()
 
 $feed = $postDao->getProfileFeed($profileId);
 
-if (empty($feed)) {
+if (empty($feed) && $profileId !== $user->getId()) {
     Common::redirect('profile');
 }
 
