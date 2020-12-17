@@ -3,7 +3,12 @@
 namespace Devbook\dao;
 
 use PDO;
-use Devbook\models\Post;
+use StdClass;
+use PDOStatement;
+use Devbook\models\{
+    Session,
+    Post
+};
 use Devbook\interfaces\PostInterface;
 use Devbook\utility\CommonValidation;
 
@@ -17,27 +22,21 @@ class PostDao implements PostInterface
             $this->pdo = $pdo;
         }
     }
-    
-    public function getProfileFeed(int $userId): array
+
+    private function fetchFeed(PDOStatement $stmt, int $userId): array
     {
         $feed = [];
-        $userRelationDao = new UserRelationDao($this->pdo);
         $userDao = new UserDao($this->pdo);
-        $userList = $userRelationDao->listRelationsFrom($userId);
+        $loggedUser = $userDao->findUserByToken(Session::get('TOKEN'));
 
-        $query = $this->pdo->prepare('
-            SELECT * FROM posts
-            WHERE user_id = :ID
-            ORDER BY created_at DESC
-        ');
-        $query->bindParam(':ID', $userId, PDO::PARAM_INT);
-        $query->execute();
+        if ($stmt->rowCount() > 0) {
+            foreach ($stmt->fetchAll() as $row) {
+                $postLikeDao = (new PostLikeDao($this->pdo));
 
-        if ($query->rowCount() > 0) {
-            foreach ($query->fetchAll() as $row) {
                 $post = $this->generatePost($row);
                 $post->setAuthor($userDao->findUserById($post->getUserId()));
-                $post->likeCount = 0;
+                $post->likeCount = $postLikeDao->getLikeCount($post->getId());
+                $post->liked = $postLikeDao->isLiked($post->getId(), $loggedUser->getId());
                 $post->comments = [];
 
                 if ($post->getUserId() === $userId) {
@@ -48,13 +47,23 @@ class PostDao implements PostInterface
         }
         return $feed;
     }
+    
+    public function getProfileFeed(int $userId): array
+    {
+        $query = $this->pdo->prepare('
+            SELECT * FROM posts
+            WHERE user_id = :ID
+            ORDER BY created_at DESC
+        ');
+        $query->bindParam(':ID', $userId, PDO::PARAM_INT);
+        $query->execute();
+
+        return $this->fetchFeed($query, $userId);
+    }
 
     public function getHomeFeed(int $loggedUserId): array
     {
-        $feed = [];
-        $userRelationDao = new UserRelationDao($this->pdo);
-        $userDao = new UserDao($this->pdo);
-        $userList = $userRelationDao->listRelationsFrom($loggedUserId);
+        $userList = (new UserRelationDao($this->pdo))->listRelationsFrom($loggedUserId);
 
         $query = $this->pdo->query('
             SELECT * FROM posts
@@ -62,23 +71,10 @@ class PostDao implements PostInterface
             ORDER BY created_at DESC
         ');
 
-        if ($query->rowCount() > 0) {
-            foreach ($query->fetchAll() as $row) {
-                $post = $this->generatePost($row);
-                $post->setAuthor($userDao->findUserById($post->getUserId()));
-                $post->likeCount = 0;
-                $post->comments = [];
-
-                if ($post->getUserId() === $loggedUserId) {
-                    $post->isAuthor = true;
-                }
-                $feed[] = $post;
-            }
-        }
-        return $feed;
+        return $this->fetchFeed($query, $loggedUserId);
     }
 
-    private function generatePost(\StdClass $post): Post
+    private function generatePost(StdClass $post): Post
     {
         $newPost = new Post();
         $newPost->setId($post->id ?? null);

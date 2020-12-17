@@ -2,6 +2,12 @@
 
 namespace Devbook\models;
 
+/**
+ * @property int likeCount
+ * @property bool liked
+ * @property array comments
+ * @property bool isAuthor
+ */
 class Post
 {
     private int $id;
@@ -10,10 +16,6 @@ class Post
     private string $body;
     private string $createdAt;
     private User $author;
-    public bool $isAuthor = false;
-    public int $likeCount;
-    public bool $liked = false;
-    public array $comments;
 
     /**
      * @return User

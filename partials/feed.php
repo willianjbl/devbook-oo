@@ -1,15 +1,15 @@
 <?php
-    switch ($feed->getType()) {
-        case 'text':
-            $type = 'fez um post';
-            break;
-        case 'photo':
-            $type = 'publicou uma foto';
-            break;
-    }
+switch ($feed->getType()) {
+    case 'text':
+        $type = 'fez um post';
+        break;
+    case 'photo':
+        $type = 'publicou uma foto';
+        break;
+}
 ?>
 
-<div class="box feed-item">
+<div class="box feed-item" data-id="<?= $feed->getId() ?>">
     <div class="box-body">
         <div class="feed-item-head row mt-20 m-width-20">
             <div class="feed-item-head-photo">

@@ -44,5 +44,7 @@ Common::renderFlash();
     </div>
 </section>
 
+<script src="<?= BASE . '/assets/js/feed.js' ?>"></script>
+
 <?php
 Common::renderPartial('footer');
