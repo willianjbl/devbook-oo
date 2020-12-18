@@ -3,35 +3,15 @@
 namespace Devbook\models;
 
 /**
- * @property int likeCount
- * @property bool liked
- * @property array comments
- * @property bool isAuthor
+ * @property \Devbook\models\User user
  */
-class Post
+class PostComment
 {
     private int $id;
+    private int $postId;
     private int $userId;
-    private string $type;
     private string $body;
     private string $createdAt;
-    private User $author;
-
-    /**
-     * @return User
-     */
-    public function getAuthor(): User
-    {
-        return $this->author;
-    }
-
-    /**
-     * @param User $author
-     */
-    public function setAuthor(User $author): void
-    {
-        $this->author = $author;
-    }
 
     /**
      * @return int
@@ -52,6 +32,22 @@ class Post
     /**
      * @return int
      */
+    public function getPostId(): int
+    {
+        return $this->postId;
+    }
+
+    /**
+     * @param int $postId
+     */
+    public function setPostId(int $postId): void
+    {
+        $this->postId = $postId;
+    }
+
+    /**
+     * @return int
+     */
     public function getUserId(): int
     {
         return $this->userId;
@@ -63,22 +59,6 @@ class Post
     public function setUserId(int $userId): void
     {
         $this->userId = $userId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param string $type
-     */
-    public function setType(string $type): void
-    {
-        $this->type = $type;
     }
 
     /**

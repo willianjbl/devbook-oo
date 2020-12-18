@@ -37,7 +37,7 @@ class PostDao implements PostInterface
                 $post->setAuthor($userDao->findUserById($post->getUserId()));
                 $post->likeCount = $postLikeDao->getLikeCount($post->getId());
                 $post->liked = $postLikeDao->isLiked($post->getId(), $loggedUser->getId());
-                $post->comments = [];
+                $post->comments = (new PostCommentDao($this->pdo))->getComments($post->getId());
 
                 if ($post->getUserId() === $userId) {
                     $post->isAuthor = true;

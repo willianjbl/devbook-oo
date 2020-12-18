@@ -1,6 +1,6 @@
 window.onload = function() {
-    document.querySelectorAll('.like-btn').forEach(item=>{
-        item.addEventListener('click', ()=>{
+    document.querySelectorAll('.like-btn').forEach(item => {
+        item.addEventListener('click', () => {
             let id = item.closest('.feed-item').getAttribute('data-id');
             let count = parseInt(item.innerText);
             if(item.classList.contains('on') === false) {

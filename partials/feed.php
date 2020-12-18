@@ -37,19 +37,21 @@ switch ($feed->getType()) {
             <div class="msg-btn"><?= count($feed->comments) ?></div>
         </div>
         <div class="feed-item-comments">
+            <div class="feed-item-comments-area">
 
-            <?php foreach ($feed->comments as $comment): ?>
-                <div class="fic-item row m-height-10 m-width-20">
-                    <div class="fic-item-photo">
-                        <a href=""><img src="<?= BASE ?>/media/avatars/avatar.jpg"  alt="avatar do usuário"/></a>
+                <?php foreach ($feed->comments as $comment): ?>
+                    <div class="fic-item row m-height-10 m-width-20">
+                        <div class="fic-item-photo">
+                            <a href="<?= BASE . "/profile.php?id={$comment->user->getId()}" ?>"><img src="<?= BASE ?>/media/avatars/<?= $comment->user->getAvatar() ?>"  alt="avatar do usuário"/></a>
+                        </div>
+                        <div class="fic-item-info">
+                            <a href="<?= BASE . "/profile.php?id={$comment->user->getId()}" ?>"><?= $comment->user->getName() ?></a>
+                            <?= $comment->getBody() ?>
+                        </div>
                     </div>
-                    <div class="fic-item-info">
-                        <a href="">Bonieky Lacerda</a>
-                        Comentando no meu próprio post
-                    </div>
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
 
+            </div>
             <div class="fic-answer row m-height-10 m-width-20">
                 <div class="fic-item-photo">
                     <a href="<?= BASE ?>/profile.php">

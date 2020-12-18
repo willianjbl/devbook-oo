@@ -44,7 +44,8 @@ Common::renderFlash();
     </div>
 </section>
 
-<script src="<?= BASE . '/assets/js/feed.js' ?>"></script>
+<script src="<?= BASE . '/assets/js/toggle-like.js' ?>"></script>
+<script src="<?= BASE . '/assets/js/new-comment.js' ?>"></script>
 
 <?php
 Common::renderPartial('footer');
