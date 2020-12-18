@@ -1,10 +1,13 @@
 <?php
 
+require 'config/config.php';
+
 use Devbook\utility\Common;
 use Devbook\models\Auth;
-use Devbook\dao\UserDao;
-
-require 'config/config.php';
+use Devbook\dao\{
+    UserRelationDao,
+    UserDao
+};
 
 $auth = new Auth($pdo);
 $user = $auth->verifyToken();
@@ -15,6 +18,7 @@ $profileUser = $profileId !== $user->getId()
     ? $userDao->findUserById($profileId, true)
     : $userDao->findUserById($user->getId(), true);
 
+$isFollowing = (new UserRelationDao($pdo))->isFollowing($user->getId(), $profileId);
 if (empty($profileId)) {
     Common::redirect('friends');
 }
@@ -31,7 +35,9 @@ Common::renderFlash();
         <section class="feed">
 
             <?php Common::renderPartial('profile-header', [
-                'profileUser' => $profileUser
+                'profileUser' => $profileUser,
+                'user' => $user,
+                'isFollowing' => $isFollowing,
             ]) ?>
 
             <?php Common::renderPartial('friends', ['profileUser' => $profileUser]) ?>
