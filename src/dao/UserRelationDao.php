@@ -82,13 +82,37 @@ class UserRelationDao implements UserRelationInterface
         return $users;
     }
 
-    public function insert(UserRelation $userRelation): bool
+    public function isFollowing(int $userFrom, int $userTo): bool
     {
-        // TODO: Implement insert() method.
+        $query = $this->pdo->prepare('
+            SELECT * FROM user_relations WHERE user_from = :USER_FROM AND user_to = :USER_TO
+        ');
+        $query->bindParam('USER_FROM',$userFrom, PDO::PARAM_INT);
+        $query->bindParam('USER_TO',$userTo, PDO::PARAM_INT);
+        $query->execute();
+
+        return $query->rowCount() > 0;
     }
 
-    public function delete(UserRelation $userRelation): bool
+    public function insert(int $userFrom, int $userTo): bool
     {
-        // TODO: Implement delete() method.
+        $query = $this->pdo->prepare('
+            INSERT INTO user_relations (user_from, user_to) VALUES (:USER_FROM, :USER_TO)
+        ');
+        $query->bindParam('USER_FROM', $userFrom, PDO::PARAM_INT);
+        $query->bindParam('USER_TO', $userTo, PDO::PARAM_INT);
+
+        return $query->execute();
+    }
+
+    public function delete(int $userFrom, int $userTo): bool
+    {
+        $query = $this->pdo->prepare('
+            DELETE FROM user_relations WHERE user_from = :USER_FROM AND user_to = :USER_TO
+        ');
+        $query->bindParam('USER_FROM', $userFrom, PDO::PARAM_INT);
+        $query->bindParam('USER_TO', $userTo, PDO::PARAM_INT);
+
+        return $query->execute();
     }
 }

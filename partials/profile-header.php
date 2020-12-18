@@ -11,6 +11,13 @@
                     <div class="profile-info-location"><?= $profileUser->getCity() ?? '' ?></div>
                 </div>
                 <div class="profile-info-data row">
+                    <div class="profile-info-item m-width-20">
+
+                        <?php if ($profileUser->getId() !== $user->getId()): ?>
+                            <a href="<?= BASE ?>/follow_action.php?id=<?= $profileUser->getId() ?>" class="button"><?= $isFollowing ? 'Deixar de Seguir' : 'Seguir' ?></a>
+                        <?php endif; ?>
+
+                    </div>
                     <a href="<?= BASE?>/friends.php?id=<?= $profileUser->getId() ?>">
                         <div class="profile-info-item m-width-20">
                             <div class="profile-info-item-n"><?= count($profileUser->followers) ?></div>

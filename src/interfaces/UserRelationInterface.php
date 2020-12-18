@@ -7,6 +7,6 @@ use Devbook\models\UserRelation;
 interface UserRelationInterface
 {
     public function listRelationsFrom(int $id): array;
-    public function insert(UserRelation $userRelation): bool;
-    public function delete(UserRelation $userRelation): bool;
+    public function insert(int $userFrom, int $userTo): bool;
+    public function delete(int $userFrom, int $userTo): bool;
 }

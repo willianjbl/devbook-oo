@@ -4,7 +4,8 @@ use Devbook\utility\Common;
 use Devbook\models\Auth;
 use Devbook\dao\{
     PostDao,
-    UserDao
+    UserDao,
+    UserRelationDao
 };
 
 require 'config/config.php';
@@ -19,6 +20,7 @@ $profileUser = $profileId !== $user->getId()
     ? $userDao->findUserById($profileId, true)
     : $userDao->findUserById($user->getId(), true);
 
+$isFollowing = (new UserRelationDao($pdo))->isFollowing($user->getId(), $profileId);
 $feed = $postDao->getProfileFeed($profileId);
 
 if (empty($feed) && $profileId !== $user->getId()) {
@@ -37,7 +39,9 @@ Common::renderFlash();
     <section class="feed">
 
         <?php Common::renderPartial('profile-header', [
-            'profileUser' => $profileUser
+            'profileUser' => $profileUser,
+            'user' => $user,
+            'isFollowing' => $isFollowing
         ]) ?>
 
         <div class="row">
