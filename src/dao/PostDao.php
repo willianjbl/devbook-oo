@@ -118,7 +118,13 @@ class PostDao implements PostInterface
     {
         $photos = [];
 
-        $query = $this->pdo->prepare("SELECT * FROM posts WHERE type = 'photo' AND user_id = :ID");
+        $query = $this->pdo->prepare("
+            SELECT *
+              FROM posts
+             WHERE type = 'photo'
+               AND user_id = :ID
+          ORDER BY id DESC
+        ");
         $query->bindParam(':ID', $id, PDO::PARAM_INT);
         $query->execute();
 

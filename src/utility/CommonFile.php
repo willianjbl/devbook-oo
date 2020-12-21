@@ -51,7 +51,20 @@ class CommonFile
                 $canvas, $image, $x, $y, 0, 0, $newWidth, $newHeight, $originalWidth, $originalHeight
             );
 
-            $folder = $type === 'cover' ? 'covers' : ($type === 'avatar' ? 'avatars' : '');
+            switch ($type) {
+                case 'cover':
+                    $folder = 'covers';
+                    break;
+                case 'avatar':
+                    $folder = 'avatars';
+                    break;
+                case 'upload':
+                    $folder = 'uploads';
+                    break;
+                default:
+                    $folder = '';
+                    break;
+            }
 
             $fileName = md5(time() . rand(0, 99999)) . '.webp';
             if (imagewebp($canvas, "./media/$folder/$fileName", 90)) {

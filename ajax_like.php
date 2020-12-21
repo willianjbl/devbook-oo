@@ -4,7 +4,7 @@ require 'config/config.php';
 use Devbook\dao\PostLikeDao;
 use Devbook\models\Auth;
 
-$postLikeDao = (new PostLikeDao($pdo));
+$postLikeDao = new PostLikeDao($pdo);
 $userId = (new Auth($pdo))->verifyToken()->getId();
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);

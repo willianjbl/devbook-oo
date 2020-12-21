@@ -11,15 +11,12 @@
         </div>
         <div class="box-body row m-20">
 
-            <?php for ($i = 0; $i < 6; $i++): ?>
-                <?php if (!empty($profileUser->photos[$i]->getBody())): ?>
+            <?php for ($i = 0; $i < 4; $i++): ?>
+                <?php if (!empty($profileUser->photos[$i]->body)): ?>
                     <div class="user-photo-item">
-                        <a href="#modal-<?= $i ?>" rel="modal:open">
-                            <img src="<?= BASE ?>/media/uploads/<?= $profileUser->photos[$i]->getBody() ?>"  alt="<?= $profileUser->photos[$i]->getBody() ?>"/>
+                        <a href="<?= BASE ?>/media/uploads/<?= $profileUser->photos[$i]->body ?>" class="glightbox" data-gallery="Minha Galeria">
+                            <img src="<?= BASE ?>/media/uploads/<?= $profileUser->photos[$i]->body ?>"  alt="photo"/>
                         </a>
-                        <div id="modal-<?= $i ?>" style="display:none">
-                            <img src="<?= BASE ?>/media/uploads/<?= $profileUser->photos[$i]->getBody() ?>>"  alt="<?= $profileUser->photos[$i]->getBody() ?>"/>
-                        </div>
                     </div>
                 <?php endif; ?>
             <?php endfor; ?>

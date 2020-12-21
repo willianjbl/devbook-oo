@@ -43,7 +43,7 @@ use Devbook\utility\CommonDate;
 
         <?php foreach ($profileUser->followings as $following): ?>
             <div class="friend-icon">
-                <a href="">
+                <a href="<?= BASE ?>/profile.php?id=<?= $following->user->getId() ?>">
                     <div class="friend-icon-avatar">
                         <img src="<?= BASE ?>/media/avatars/<?= $following->user->getAvatar() ?>"  alt=""/>
                     </div>

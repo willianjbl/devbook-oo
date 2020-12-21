@@ -30,7 +30,13 @@ switch ($feed->getType()) {
             </div>
         </div>
         <div class="feed-item-body mt-10 m-width-20">
-            <?= nl2br($feed->getBody()) ?>
+
+            <?php if ($feed->getType() === 'text'): ?>
+                <?= nl2br($feed->getBody()) ?>
+            <?php elseif($feed->getType() === 'photo'): ?>
+                <img src="<?= BASE ?>/media/uploads/<?= $feed->getBody() ?>" alt="photo"/>
+            <?php endif; ?>
+
         </div>
         <div class="feed-item-buttons row mt-20 m-width-20">
             <div class="like-btn <?= $feed->liked ? 'on' : '' ?>"><?= $feed->likeCount ?></div>

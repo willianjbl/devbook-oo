@@ -74,6 +74,7 @@ Common::renderFlash();
 
 <script src="<?= BASE . '/assets/js/toggle-like.js' ?>"></script>
 <script src="<?= BASE . '/assets/js/new-comment.js' ?>"></script>
+<script src="<?= BASE . '/assets/js/new-photo.js' ?>"></script>
 
 <?php
 Common::renderPartial('footer');

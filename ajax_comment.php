@@ -8,8 +8,8 @@ use Devbook\models\{
     PostComment
 };
 
-$postCommentDao = (new postCommentDao($pdo));
-$userId = (new Auth($pdo))->verifyToken();
+$postCommentDao = new postCommentDao($pdo);
+$user = (new Auth($pdo))->verifyToken();
 
 $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
 $txt = filter_input(INPUT_POST, 'txt', FILTER_SANITIZE_STRING);
@@ -22,15 +22,15 @@ if ($id && $txt) {
     $newComment = new PostComment();
     $newComment->setPostId($id);
     $newComment->setBody($txt);
-    $newComment->setUserId($userId->getId());
+    $newComment->setUserId($user->getId());
     $newComment->setCreatedAt(date('Y-m-d H:i:s'));
 
     if ($postCommentDao->addComment($newComment)) {
         $retorno = [
             'error' => false,
-            'link' => BASE . "/profile?id={$userId->getId()}",
-            'avatar' => BASE . "/media/avatars/{$userId->getAvatar()}",
-            'name' => $userId->getName(),
+            'link' => BASE . "/profile?id={$user->getId()}",
+            'avatar' => BASE . "/media/avatars/{$user->getAvatar()}",
+            'name' => $user->getName(),
             'body' => $txt,
         ];
     }
