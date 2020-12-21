@@ -27,7 +27,8 @@ class PostLikeDao implements PostLikeInterface
 
     public function isLiked(int $postId, int $userId): bool
     {
-        $query = $this->pdo->prepare('SELECT * FROM post_likes WHERE user_id = :ID');
+        $query = $this->pdo->prepare('SELECT * FROM post_likes WHERE post_id = :POST_ID AND user_id = :ID');
+        $query->bindParam('POST_ID', $postId, PDO::PARAM_INT);
         $query->bindParam('ID', $userId, PDO::PARAM_INT);
         $query->execute();
 

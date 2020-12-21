@@ -8,5 +8,5 @@ interface PostInterface
 {
     public function insert(Post $post): bool;
     public function update(Post $post): bool;
-    public function delete(Post $post): bool;
+    public function delete(int $id, int $userID): bool;
 }

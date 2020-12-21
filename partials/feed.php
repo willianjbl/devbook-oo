@@ -25,9 +25,16 @@ switch ($feed->getType()) {
                     <?= \Devbook\utility\CommonDate::brazilianDateTimeConvert($feed->getCreatedAt()) ?>
                 </span>
             </div>
-            <div class="feed-item-head-btn">
-                <img src="<?= BASE ?>/assets/images/more.png"  alt="opções"/>
-            </div>
+
+            <?php if ($feed->isAuthor): ?>
+                <div class="feed-item-head-btn">
+                    <img src="<?= BASE ?>/assets/images/more.png"  alt="opções"/>
+                    <div class="feed-item-more-window">
+                        <a href="<?= BASE ?>/excluir_post_action.php?id=<?= $feed->getId() ?>">Excluir</a>
+                    </div>
+                </div>
+            <?php endif; ?>
+
         </div>
         <div class="feed-item-body mt-10 m-width-20">
 
