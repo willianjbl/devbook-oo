@@ -7,12 +7,9 @@
 
                         <?php foreach ($profileUser->photos as $key => $photo): ?>
                             <div class="user-photo-item">
-                                <a href="#modal-<?= $key ?>" rel="modal:open">
-                                    <img src="<?= BASE ?>/media/uploads/<?= $photo->getBody() ?>"  alt="<?= $photo->getBody() ?>"/>
+                                <a href="<?= BASE ?>/media/uploads/<?= $photo->body ?>" class="glightbox" data-gallery="Minha Galeria">
+                                    <img src="<?= BASE ?>/media/uploads/<?= $photo->body ?>"  alt="photo"/>
                                 </a>
-                                <div id="modal-<?= $key ?>" style="display:none">
-                                    <img src="<?= BASE ?>/media/uploads/<?= $photo->getBody() ?>>"  alt="<?= $photo->getBody() ?>"/>
-                                </div>
                             </div>
                         <?php endforeach; ?>
 
