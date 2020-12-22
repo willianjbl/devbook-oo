@@ -41,7 +41,9 @@ switch ($feed->getType()) {
             <?php if ($feed->getType() === 'text'): ?>
                 <?= nl2br($feed->getBody()) ?>
             <?php elseif($feed->getType() === 'photo'): ?>
-                <img src="<?= BASE ?>/media/uploads/<?= $feed->getBody() ?>" alt="photo"/>
+                <a href="<?= BASE ?>/media/uploads/<?= $feed->getBody() ?>" class="glightbox" data-gallery="<?= $feed->getBody() ?>">
+                    <img src="<?= BASE ?>/media/uploads/<?= $feed->getBody() ?>"  alt="photo"/>
+                </a>
             <?php endif; ?>
 
         </div>
