@@ -2,16 +2,18 @@
 
 namespace Devbook\dao;
 
-use Devbook\utility\Common;
-use PDO;
-use StdClass;
-use PDOStatement;
+use Devbook\interfaces\PostInterface;
+use Devbook\utility\{
+    CommonValidation,
+    Common,
+};
 use Devbook\models\{
     Session,
-    Post
+    Post,
 };
-use Devbook\interfaces\PostInterface;
-use Devbook\utility\CommonValidation;
+use PDOStatement;
+use StdClass;
+use PDO;
 
 class PostDao implements PostInterface
 {
@@ -19,12 +21,10 @@ class PostDao implements PostInterface
 
     public function __construct(PDO $pdo)
     {
-        if (empty($this->pdo)) {
-            $this->pdo = $pdo;
-        }
+        $this->pdo = $this->pdo ?? $pdo;
     }
 
-    private function fetchFeed(PDOStatement $stmt, int $userId): array
+    private function fetchFeed(PDOStatement $stmt, int $userId, int $totalPages, int $currentPage): array
     {
         $feed = [];
         $userDao = new UserDao($this->pdo);
@@ -44,36 +44,74 @@ class PostDao implements PostInterface
                 if ($post->getUserId() === $userId) {
                     $post->isAuthor = true;
                 }
-                $feed[] = $post;
+                $feed['feed'][] = $post;
             }
+            $feed['totalPages'] = $totalPages;
+            $feed['currentPage'] = $currentPage;
         }
         return $feed;
     }
     
     public function getProfileFeed(int $userId): array
     {
-        $query = $this->pdo->prepare('
-            SELECT * FROM posts
-            WHERE user_id = :ID
-            ORDER BY created_at DESC
-        ');
-        $query->bindParam(':ID', $userId, PDO::PARAM_INT);
-        $query->execute();
+        $page = intval(filter_input(INPUT_GET, 'p', FILTER_VALIDATE_INT));
+        $perPage = 5;
 
-        return $this->fetchFeed($query, $userId);
+        if ($page < 1) {
+            $page = 1;
+        }
+
+        $pageOffset = ($page - 1) * $perPage;
+
+        $feed = $this->pdo->prepare("
+            SELECT *
+              FROM posts
+             WHERE user_id = :ID
+          ORDER BY created_at DESC
+             LIMIT {$pageOffset},{$perPage} 
+        ");
+        $feed->bindParam(':ID', $userId, PDO::PARAM_INT);
+        $feed->execute();
+
+        $totalPages = $this->pdo->prepare('
+            SELECT COUNT(*) as count
+              FROM posts
+             WHERE user_id = :ID
+        ');
+        $totalPages->bindParam(':ID', $userId, PDO::PARAM_INT);
+        $totalPages->execute();
+        $totalPages = ceil($totalPages->fetch(PDO::FETCH_OBJ)->count / $perPage);
+
+        return $this->fetchFeed($feed, $userId, $totalPages, $page);
     }
 
     public function getHomeFeed(int $loggedUserId): array
     {
         $userList = (new UserRelationDao($this->pdo))->listRelationsFrom($loggedUserId);
+        $page = intval(filter_input(INPUT_GET, 'p', FILTER_VALIDATE_INT));
+        $perPage = 5;
 
-        $query = $this->pdo->query('
-            SELECT * FROM posts
-            WHERE user_id IN (' . implode(',', $userList) . ')
-            ORDER BY created_at DESC
-        ');
+        if ($page < 1) {
+            $page = 1;
+        }
 
-        return $this->fetchFeed($query, $loggedUserId);
+        $pageOffset = ($page - 1) * $perPage;
+
+        $feed = $this->pdo->query("
+            SELECT *
+              FROM posts
+             WHERE user_id IN (" . implode(',', $userList) . ")
+          ORDER BY created_at DESC
+             LIMIT {$pageOffset},{$perPage} 
+        ");
+        $totalPages = $this->pdo->query("
+            SELECT COUNT(*) AS count
+              FROM posts
+             WHERE user_id IN (" . implode(',', $userList) . ")
+        ");
+        $totalPages = ceil($totalPages->fetch(PDO::FETCH_OBJ)->count / $perPage);
+
+        return $this->fetchFeed($feed, $loggedUserId, $totalPages, $page);
     }
 
     private function generatePost(StdClass $post): Post
@@ -175,16 +213,16 @@ class PostDao implements PostInterface
     {
         $result = [];
         $query = $this->pdo->prepare("
-            SELECT U.id, U.name, U.avatar,
-                   P.id, P.body, P.created_at
-            FROM       posts AS P
+                SELECT U.id, U.name, U.avatar,
+                       P.id, P.body, P.created_at
+                  FROM posts AS P
             INNER JOIN users AS U
-            ON         P.user_id = U.id
+                    ON P.user_id = U.id
             INNER JOIN user_relations AS UR
-            ON         U.id = UR.user_to
-            WHERE P.body     LIKE :BODY AND
-                  P.type        = 'text' AND
-                  UR.user_from  = :ID
+                    ON U.id = UR.user_to
+                 WHERE P.body LIKE :BODY
+                   AND P.type = 'text'
+                   AND UR.user_from = :ID
         ");
         $query->bindValue('BODY', "%$searchTerm%", PDO::PARAM_STR);
         $query->bindParam('ID', $loggedUserId, PDO::PARAM_INT);

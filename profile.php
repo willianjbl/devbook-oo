@@ -22,6 +22,7 @@ $profileUser = $profileId !== $user->getId()
 
 $isFollowing = (new UserRelationDao($pdo))->isFollowing($user->getId(), $profileId);
 $feed = $postDao->getProfileFeed($profileId);
+$posts = $feed['feed'];
 
 if (empty($feed) && $profileId !== $user->getId()) {
     Common::redirect('profile');
@@ -59,12 +60,18 @@ Common::renderFlash();
                         Common::renderPartial('new-post', ['user' => $user]);
                     }
 
-                    foreach ($feed as $feedItem) {
+                    foreach ($posts as $feedItem) {
                         Common::renderPartial('feed', [
                             'user' => $user,
                             'feed' => $feedItem
                         ]);
                     }
+
+                    Common::renderPartial('paginator', [
+                        'url' => $profileId ? BASE . "/profile.php?id=$profileId&" : BASE . '/profile.php?',
+                        'totalPages' => $feed['totalPages'],
+                        'currentPage' => $feed['currentPage'],
+                    ]);
                 ?>
 
             </div>

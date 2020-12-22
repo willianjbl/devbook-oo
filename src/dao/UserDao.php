@@ -13,9 +13,7 @@ class UserDao implements UserInterface
 
     public function __construct(PDO $pdo)
     {
-        if (empty($this->pdo)) {
-            $this->pdo = $pdo;
-        }
+        $this->pdo = $this->pdo ?? $pdo;
     }
 
     private function generateUser(

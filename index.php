@@ -11,6 +11,7 @@ $user = $auth->verifyToken();
 
 $postDao = new PostDao($pdo);
 $feed = $postDao->getHomeFeed($user->getId());
+$posts = $feed['feed'];
 
 Common::renderPartial('header', [
     'title' => 'Feed',
@@ -27,12 +28,20 @@ Common::renderFlash();
             <?php
                 Common::renderPartial('new-post', ['user' => $user]);
 
-                foreach ($feed as $feedItem) {
+                foreach ($posts as $feedItem) {
                     Common::renderPartial('feed', [
                         'user' => $user,
                         'feed' => $feedItem
                     ]);
                 }
+            ?>
+
+            <?php
+                Common::renderPartial('paginator', [
+                    'url' => BASE . '/?',
+                    'totalPages' => $feed['totalPages'],
+                    'currentPage' => $feed['currentPage'],
+                ]);
             ?>
 
         </div>

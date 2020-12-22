@@ -15,9 +15,7 @@ class UserRelationDao implements UserRelationInterface
 
     public function __construct(PDO $pdo)
     {
-        if (empty($this->pdo)) {
-            $this->pdo = $pdo;
-        }
+        $this->pdo = $this->pdo ?? $pdo;
     }
 
     public function getFollowers(int $id): array

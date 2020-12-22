@@ -12,9 +12,7 @@ class PostCommentDao implements PostCommentInterface
 
     public function __construct(PDO $pdo)
     {
-        if (empty($this->pdo)) {
-            $this->pdo = $pdo;
-        }
+        $this->pdo = $this->pdo ?? $pdo;
     }
 
     public function getComments(int $postId): array

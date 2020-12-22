@@ -11,9 +11,7 @@ class PostLikeDao implements PostLikeInterface
 
     public function __construct(PDO $pdo)
     {
-        if (empty($this->pdo)) {
-            $this->pdo = $pdo;
-        }
+        $this->pdo = $this->pdo ?? $pdo;
     }
 
     public function getLikeCount(int $postId): int

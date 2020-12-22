@@ -419,6 +419,25 @@ header .head-side {
     margin:0;
 }
 
+.paginator {
+    margin-top: 0.5em;
+}
+.paginator a {
+    color: #000;
+    text-decoration: none;
+    border: 1px solid #CCC;
+    padding: 5px;
+    max-width: 10px;
+    border-radius: 3px;
+}
+.paginator a:hover {
+    background-color: #d1d9e0;
+}
+.paginator a.active {
+    background-color: #FFF;
+    cursor: default;
+}
+
 /******************************************************
                         FLASH
 ******************************************************/
