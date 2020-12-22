@@ -8,9 +8,13 @@ require 'config/config.php';
 
 $auth = new Auth($pdo);
 $user = $auth->verifyToken();
-
 $postDao = new PostDao($pdo);
-$feed = $postDao->getHomeFeed($user->getId());
+
+$page = intval(filter_input(INPUT_GET, 'p', FILTER_VALIDATE_INT));
+if ($page < 1) {
+    $page = 1;
+}
+$feed = $postDao->getHomeFeed($user->getId(), $page);
 $posts = $feed['feed'];
 
 Common::renderPartial('header', [

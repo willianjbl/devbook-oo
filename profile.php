@@ -21,7 +21,13 @@ $profileUser = $profileId !== $user->getId()
     : $userDao->findUserById($user->getId(), true);
 
 $isFollowing = (new UserRelationDao($pdo))->isFollowing($user->getId(), $profileId);
-$feed = $postDao->getProfileFeed($profileId);
+
+$page = intval(filter_input(INPUT_GET, 'p', FILTER_VALIDATE_INT));
+if ($page < 1) {
+    $page = 1;
+}
+
+$feed = $postDao->getProfileFeed($profileId, $page);
 $posts = $feed['feed'];
 
 if (empty($feed) && $profileId !== $user->getId()) {

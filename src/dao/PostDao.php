@@ -52,14 +52,9 @@ class PostDao implements PostInterface
         return $feed;
     }
     
-    public function getProfileFeed(int $userId): array
+    public function getProfileFeed(int $userId, int $page = 1): array
     {
-        $page = intval(filter_input(INPUT_GET, 'p', FILTER_VALIDATE_INT));
         $perPage = 5;
-
-        if ($page < 1) {
-            $page = 1;
-        }
 
         $pageOffset = ($page - 1) * $perPage;
 
@@ -85,15 +80,10 @@ class PostDao implements PostInterface
         return $this->fetchFeed($feed, $userId, $totalPages, $page);
     }
 
-    public function getHomeFeed(int $loggedUserId): array
+    public function getHomeFeed(int $loggedUserId, int $page = 1): array
     {
         $userList = (new UserRelationDao($this->pdo))->listRelationsFrom($loggedUserId);
-        $page = intval(filter_input(INPUT_GET, 'p', FILTER_VALIDATE_INT));
         $perPage = 5;
-
-        if ($page < 1) {
-            $page = 1;
-        }
 
         $pageOffset = ($page - 1) * $perPage;
 

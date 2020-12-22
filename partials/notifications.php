@@ -6,8 +6,8 @@
         </div>
     </div>
     <div class="box-body">
-        <a href=""><img src="https://alunos.b7web.com.br/media/courses/php-nivel-1.jpg"  alt="patrocinio-1"/></a>
-        <a href=""><img src="https://alunos.b7web.com.br/media/courses/laravel-nivel-1.jpg"  alt="patrocinio-2"/></a>
+        <a href=""><img src="https://alunos.b7web.com.br/media/courses/php.jpg"  alt="patrocinio-1"/></a>
+        <a href=""><img src="https://alunos.b7web.com.br/media/courses/laravel.jpg"  alt="patrocinio-2"/></a>
     </div>
 </div>
 <div class="box">
